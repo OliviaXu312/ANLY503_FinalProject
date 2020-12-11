@@ -4,10 +4,10 @@ navbar:
   title: "Olivia"
   right:
   - text: "Kickstarter Campaign Visualization" 
-    href: Data.html
+    href: Index.html
     menu: 
       - text: "Methods"
-        href: Data.html 
+        href: Index.html 
       - text: "Data Exploration" 
         href: Data_Exploration.html
       - text: "Provide Insights" 
