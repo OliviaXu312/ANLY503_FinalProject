@@ -1,0 +1,31 @@
+---
+title: ""
+output: 
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+---
+
+![](kickstarter-logo.png)
+
+</br>
+
+## **Conclusion**
+
+In summary, I observed a clear pattern in the current successful campaigns in Kickstarters and summarized several key elements which leads to a successful campaign. 
+
+For Kickstarter, they should value those key elements and tried to build a prediction model to decide which project they should promote. Kickstarter’s goal should be to have as many successfully-funded campaigns as possible. This is especially important because if a campaign doesn’t reach its funding goal, it receives none of the money and the project is very likely to cease to exist. 
+
+</br>
+
+## **Implication**
+
+Through this analysis, Kickstarter can now do the following:
+
+ + Understand their target market and usage trends to make general marketing more effective - i.e. concentrating marketing dollars around the work schedule
+
+ + Create generalized “tips and tricks” as marketing assets based on insights around what campaign attributes tend to lead to more successful campaigns
+ 
+ + Be proactive about marketing to high-failure-risk campaigns including featuring high potential campaigns, as “staff picks” to increase success rate
+ 

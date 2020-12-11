@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Provide_Insights.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Olivia</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Kickstarter Campaign Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Data.html">Methods</a>
+    </li>
+    <li>
+      <a href="Data_Exploration.html">Data Exploration</a>
+    </li>
+    <li>
+      <a href="Provide_Insights.html">Provide Insights</a>
+    </li>
+    <li>
+      <a href="Network.html">Network</a>
+    </li>
+    <li>
+      <a href="conclusion.html">Conclusion</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bank Transactions Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Methods.html">Methods</a>
+    </li>
+    <li>
+      <a href="Bank_Transaction_Visualization.html">Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Historical_US_Election_Visualization.html">US Election Visualization</a>
+</li>
+<li>
+  <a href="Migration1.html">State to State Migrations in 2018</a>
+</li>
+<li>
+  <a href="https://github.com/OliviaXu312/ANLY503_FinalProject">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<p><img src="kickstarter-logo.png" /></p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.colors
+import geopandas as gpd
+import seaborn as sns
+import warnings
+
+sns.set_style(&quot;whitegrid&quot;)
+color = sns.color_palette()
+
+warnings.filterwarnings(&#39;ignore&#39;)</code></pre>
+<pre class="python"><code>Kickstarter = pd.read_csv(&quot;Cleaned_Kickstarter.csv&quot;)
+
+successful_kickstarter = Kickstarter[Kickstarter[&#39;state&#39;] == &quot;successful&quot;]
+failed_kickstarter = Kickstarter[Kickstarter[&#39;state&#39;] == &quot;failed&quot;]
+
+compare_name_len_clean = pd.concat([Kickstarter[&#39;name_len_clean&#39;].value_counts(),
+                                    successful_kickstarter[&#39;name_len_clean&#39;].value_counts(),
+                                    failed_kickstarter[&#39;name_len_clean&#39;].value_counts()], axis=1)
+compare_name_len_clean.columns = [&#39;all&#39;,&#39;successful&#39;,&#39;failed&#39;]
+compare_name_len_clean.loc[&#39;total&#39;] = compare_name_len_clean.sum(axis=0)
+
+def get_perc(val, col):
+    return (val / compare_name_len_clean[col][&#39;total&#39;])*100
+
+compare_name_len_clean[&#39;all_perc&#39;] = compare_name_len_clean[&#39;all&#39;].apply(get_perc, args=(&#39;all&#39;,))
+compare_name_len_clean[&#39;success_perc&#39;] = compare_name_len_clean[&#39;successful&#39;].apply(get_perc, args=(&#39;successful&#39;,))
+compare_name_len_clean[&#39;failed_perc&#39;] = compare_name_len_clean[&#39;failed&#39;].apply(get_perc, args=(&#39;failed&#39;,))
+compare_name_len_clean = compare_name_len_clean.reset_index()
+
+compare_name_len_clean_successful = compare_name_len_clean[[&quot;index&quot;, &quot;success_perc&quot;]].rename(columns={&#39;success_perc&#39;: &#39;perc&#39;})
+compare_name_len_clean_successful[&quot;state&quot;] = &quot;successful&quot;
+compare_name_len_clean_failed = compare_name_len_clean[[&quot;index&quot;, &quot;failed_perc&quot;]].rename(columns={&#39;failed_perc&#39;: &#39;perc&#39;})
+compare_name_len_clean_failed[&quot;state&quot;] = &quot;failed&quot;
+
+name_len_clean = pd.concat([compare_name_len_clean_successful, compare_name_len_clean_failed])
+name_len_clean = name_len_clean[name_len_clean[&quot;index&quot;] != &quot;total&quot;]
+
+compare_blurb_len_clean = pd.concat([Kickstarter[&quot;blurb_len_clean&quot;].value_counts(),
+                                     successful_kickstarter[&quot;blurb_len_clean&quot;].value_counts(),
+                                     failed_kickstarter[&quot;blurb_len_clean&quot;].value_counts()], axis=1)
+
+compare_blurb_len_clean.columns = [&#39;all&#39;,&#39;successful&#39;,&#39;failed&#39;]
+compare_blurb_len_clean.loc[&#39;total&#39;] = compare_blurb_len_clean.sum(axis=0)
+
+def get_perc(val, col):
+    return (val / compare_blurb_len_clean[col][&#39;total&#39;])*100
+
+compare_blurb_len_clean[&#39;all_perc&#39;] = compare_blurb_len_clean[&#39;all&#39;].apply(get_perc, args=(&#39;all&#39;,))
+compare_blurb_len_clean[&#39;success_perc&#39;] = compare_blurb_len_clean[&#39;successful&#39;].apply(get_perc, args=(&#39;successful&#39;,))
+compare_blurb_len_clean[&#39;failed_perc&#39;] = compare_blurb_len_clean[&#39;failed&#39;].apply(get_perc, args=(&#39;failed&#39;,))
+
+compare_blurb_len_clean = compare_blurb_len_clean.reset_index()
+
+compare_blurb_len_clean_successful = compare_blurb_len_clean[[&quot;index&quot;, &quot;success_perc&quot;]].rename(columns={&#39;success_perc&#39;: &#39;perc&#39;})
+compare_blurb_len_clean_successful[&quot;state&quot;] = &quot;successful&quot;
+compare_blurb_len_clean_failed = compare_blurb_len_clean[[&quot;index&quot;, &quot;failed_perc&quot;]].rename(columns={&#39;failed_perc&#39;: &#39;perc&#39;})
+compare_blurb_len_clean_failed[&quot;state&quot;] = &quot;failed&quot;
+
+blurb_len_clean = pd.concat([compare_blurb_len_clean_successful, compare_blurb_len_clean_failed])
+blurb_len_clean = blurb_len_clean[blurb_len_clean[&quot;index&quot;] != &quot;total&quot;]
+
+crt_launch_ddl_Kickstarter = pd.read_csv(&quot;crt_launch_ddl_Kickstarter.csv&quot;)
+# crt_launch_ddl_Kickstarter = pd.DataFrame(columns = [&#39;state&#39;, &#39;create_to_launch_day&#39;, &#39;launch_to_deadline_day&#39;]) 
+# 
+# for idx, row in Kickstarter.iterrows():
+#     crt_launch_ddl_Kickstarter.loc[idx, &quot;state&quot;] = Kickstarter.loc[idx, &quot;state&quot;]
+#     crt_launch_ddl_Kickstarter.loc[idx, &quot;create_to_launch_day&quot;] = Kickstarter.loc[idx, &quot;create_to_launch&quot;].split()[0]
+#     crt_launch_ddl_Kickstarter.loc[idx, &quot;launch_to_deadline_day&quot;] = Kickstarter.loc[idx, &quot;launch_to_deadline&quot;].split()[0]
+# 
+# crt_launch_ddl_Kickstarter[&quot;year&quot;] = Kickstarter[&quot;launched_at_yr&quot;]
+# crt_launch_ddl_Kickstarter[&quot;staff_pick&quot;] = Kickstarter[&quot;staff_pick&quot;]
+# crt_launch_ddl_Kickstarter = crt_launch_ddl_Kickstarter[crt_launch_ddl_Kickstarter[&quot;state&quot;].isin([&quot;successful&quot;, &quot;failed&quot;])]
+# 
+# crt_launch_ddl_Kickstarter = crt_launch_ddl_Kickstarter.astype({&#39;create_to_launch_day&#39;: &#39;int32&#39;, &#39;launch_to_deadline_day&#39;: &#39;int32&#39;,
+#                                    &#39;year&#39;: &#39;object&#39;})
+
+Kickstarter_staff_pick = Kickstarter.groupby([&quot;staff_pick&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_staff_pick = Kickstarter_staff_pick.reset_index()</code></pre>
+<div id="names-and-description" class="section level2">
+<h2><strong>Names and Description</strong></h2>
+<div id="campaigns-with-longer-names-and-descriptions-are-more-likely-to-be-successful." class="section level3">
+<h3><strong>Campaigns with longer names and descriptions are more likely to be successful.</strong></h3>
+<ul>
+<li>After removing stop words, successful campaign names are on average approximately 1 word longer than failed campaign names. In fact, campaigns with names less than or equal to 3 words are 2.1 times more likely to fail than those longer than 3 words. Successful campaign descriptions are also significantly longer than failed campaign descriptions</li>
+</ul>
+<pre class="python"><code>fig, ax = plt.subplots(2, 1, figsize=(20, 20))
+
+sns.barplot(data = name_len_clean[name_len_clean[&quot;index&quot;] &lt; 16], hue_order = [&quot;successful&quot;, &quot;failed&quot;],
+            x = &quot;index&quot;, y=&quot;perc&quot;, hue = &quot;state&quot;,palette = &quot;Set2&quot;, ax=ax[0])
+ax[0].set_title(&#39;The distribution for the length of campaign name&#39;)
+ax[0].set_xlabel(&#39;The length of campaign name&#39;)
+ax[0].set_ylabel(&#39;Perc&#39;)
+
+sns.barplot(data = blurb_len_clean[blurb_len_clean[&quot;index&quot;] &lt; 16], hue_order = [&quot;successful&quot;, &quot;failed&quot;],
+            x = &quot;index&quot;, y=&quot;perc&quot;, hue = &quot;state&quot;,palette = &quot;Set2&quot;, ax=ax[1])
+ax[1].set_title(&#39;The distribution for the length of description&#39;)
+ax[1].set_xlabel(&#39;The length of description&#39;)
+ax[1].set_ylabel(&#39;Perc&#39;)
+
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-3-1.png" width="1920" /></p>
+</div>
+</div>
+<div id="times" class="section level2">
+<h2><strong>Times</strong></h2>
+<div id="successful-campaigns-invest-more-time-in-creating-the-campaign" class="section level3">
+<h3><strong>Successful campaigns invest more time in creating the campaign</strong></h3>
+<ul>
+<li>Successful campaigns tend to invest more money in creating the campaign. The median number of days spent between creation and launch for successful campaigns is 16, as compared to the median of 7 days spent for failed campaigns, suggesting the importance of preparation. Furthermore, the longer funding time do not yield better results.</li>
+</ul>
+<pre class="python"><code>fig, ax = plt.subplots(2, 1, figsize=(20, 20))
+
+sns.violinplot(x=&quot;state&quot;, y = &quot;create_to_launch_day&quot;, hue=&quot;state&quot;, 
+               data = crt_launch_ddl_Kickstarter[crt_launch_ddl_Kickstarter.create_to_launch_day &lt; 100], palette=&quot;Spectral&quot;, scale=&quot;count&quot;, inner=&quot;quartile&quot;, ax=ax[0])
+ax[0].set_title(&#39;The distribution for the duration between create day to launch day&#39;)
+ax[0].set_xlabel(&#39;state&#39;)
+ax[0].set_ylabel(&#39;The duration between create day to launch day&#39;)
+
+
+sns.violinplot(x=&quot;state&quot;, y = &quot;launch_to_deadline_day&quot;, hue=&quot;state&quot;, inner=&quot;quartile&quot;,
+               data = crt_launch_ddl_Kickstarter, palette=&quot;coolwarm&quot;, scale=&quot;count&quot;, ax=ax[1])
+ax[1].set_title(&#39;The distribution for the duration between launch day to deadline&#39;)
+ax[1].set_xlabel(&#39;state&#39;)
+ax[1].set_ylabel(&#39;The duration between launch day to deadline&#39;)
+
+
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-4-1.png" width="1920" /></p>
+</div>
+<div id="time-spent-between-creation-and-launch-get-longer-over-10-years" class="section level3">
+<h3><strong>Time spent between creation and launch get longer over 10 years</strong></h3>
+<ul>
+<li>Generally speaking, time spent between creation and launch get longer over 10 years, while the fact that successful campaigns spend more money in creating the campaign doesn’t change. But the funding time for majority projects shortened in the past ten years. Before 2012, the average funding time is over 40 days, with 25% over 80 days, while in 2020, the funding time for majority projects is below 40 days.</li>
+</ul>
+<pre class="python"><code>fig, ax = plt.subplots(2, 1, figsize=(20, 20))
+
+sns.violinplot(x=&quot;year&quot;, y = &quot;create_to_launch_day&quot;, hue=&quot;state&quot;, 
+               data = crt_launch_ddl_Kickstarter[crt_launch_ddl_Kickstarter.create_to_launch_day &lt; 100], palette=&quot;Pastel2&quot;, 
+               split=True, scale=&quot;count&quot;, inner=&quot;quartile&quot;, ax=ax[0])
+ax[0].set_title(&#39;The distribution for the duration between create day to launch day in different year&#39;)
+ax[0].set_xlabel(&#39;state&#39;)
+ax[0].set_ylabel(&#39;The duration between create day to launch day&#39;)
+
+
+sns.violinplot(x=&quot;year&quot;, y = &quot;launch_to_deadline_day&quot;, hue=&quot;state&quot;, inner=&quot;quartile&quot;,
+               data = crt_launch_ddl_Kickstarter, palette=&quot;Set3&quot;, split=True, scale=&quot;count&quot;, ax=ax[1])
+ax[1].set_title(&#39;The distribution for the duration between launch day to deadline in different year&#39;)
+ax[1].set_xlabel(&#39;state&#39;)
+ax[1].set_ylabel(&#39;The duration between launch day to deadline&#39;)
+
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-5-1.png" width="1920" /></p>
+</div>
+</div>
+<div id="goals" class="section level2">
+<h2><strong>Goals</strong></h2>
+<div id="setting-the-right-goal-is-as-important-as-youd-think" class="section level3">
+<h3><strong>Setting the right goal is as important as you’d think</strong></h3>
+<ul>
+<li>The median goal for successful campaigns from this data is 2,750 while the median goal for failed campaigns is nearly 5,000. We also found that 28% of failed campaigns had a goal of over 50,000. When comparing successful and failed campaigns, we found that the goal matters especially when the goal is very high.</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.boxplot(x=&quot;state&quot;, y=&quot;goal&quot;,
+            hue=&quot;state&quot;, palette=&quot;Pastel2&quot;,
+            data = Kickstarter[Kickstarter.goal &lt; 30000])
+sns.despine(offset=10, trim=True)
+
+plt.title(&quot;The distribution of campaign goal under different state&quot;)
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-6-1.png" width="1920" /></p>
+</div>
+<div id="technology-and-food-oriented-campaign-has-higher-goal" class="section level3">
+<h3><strong>Technology and food oriented campaign has higher goal</strong></h3>
+<ul>
+<li>Comparing to other projects, campaigns under technology and food category obviously sets a higher goal.The median goal for successful campaigns from this data is 5,750, while the median goal in food oriented campaigns is over 8,213 and the median goal in technology oriented campaigns is over 10,000. Maybe that’s the reason for their failure.</li>
+</ul>
+<pre class="python"><code>Kickstarter_category_goal = Kickstarter[Kickstarter.state.isin([&quot;successful&quot;, &quot;failed&quot;])]
+
+fig = plt.figure(figsize=(20, 10))
+
+sns.violinplot(x=&quot;category_parent&quot;, y=&quot;goal&quot;,
+            hue=&quot;state&quot;, palette=&quot;Pastel1&quot;,
+            split=True, scale=&quot;count&quot;, inner=&quot;quartile&quot;,
+            data = Kickstarter_category_goal[Kickstarter_category_goal.goal &lt; 30000])
+sns.despine(offset=10, trim=True)
+
+plt.title(&quot;The distribution of campaign goal under different category&quot;)
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-7-1.png" width="1920" /></p>
+</div>
+<div id="campaign-goal-reached-high-point-in-2017" class="section level3">
+<h3><strong>Campaign goal reached high point in 2017</strong></h3>
+<ul>
+<li>During 2015 - 2017, the US enjoyed the steady growth of Economy, which makes the the median goal for campaigns reached a high point. After 2017, recession started and the goal for campaigns went down correspondingly</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.violinplot(x=&quot;launched_at_yr&quot;, y=&quot;goal&quot;, hue=&quot;state&quot;,  palette=&quot;Spectral&quot;, split=True, scale=&quot;count&quot;, inner=&quot;quartile&quot;,
+             data = Kickstarter_category_goal[Kickstarter_category_goal.goal &lt; 30000])
+
+plt.title(&quot;Distribution of Campaigns Goal over ten years&quot;)
+plt.xlabel(&quot;Time&quot;)
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-8-1.png" width="1920" /></p>
+</div>
+</div>
+<div id="staff-picked" class="section level2">
+<h2><strong>Staff Picked</strong></h2>
+<div id="staff-picks-have-significant-impact-on-campaign-success" class="section level3">
+<h3><strong>Staff picks have significant impact on campaign success</strong></h3>
+<ul>
+<li>Kickstarter’s “staff picks” are given high-value front page real estate as “Projects We Love”. Since these projects are given such high visibility, it’s no surprise that staff pick projects are more likely to be successful than those that aren’t</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.barplot(x=&quot;staff_pick&quot;, y=&quot;count&quot;, hue=&quot;state&quot;, palette = &quot;Spectral&quot;, data = Kickstarter_staff_pick)
+
+plt.title(&quot;Distribution of Campaigns over ten years&quot;)
+plt.xlabel(&quot;Whether it&#39;s staff picked &quot;)
+plt.ylabel(&quot;Number of Campaigns&quot;)
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-9-1.png" width="1920" /></p>
+</div>
+<div id="staff-pick-projects-have-higher-goal" class="section level3">
+<h3><strong>Staff pick projects have higher goal</strong></h3>
+<ul>
+<li>Kickstarter love promoting projects with higher goal. Since it’s understandable that not all projects can be staff picks, by promoting high high-value projects, Kickstarter can leverage the power of staff picks to improve its revenue.</li>
+</ul>
+<pre class="python"><code>Kickstarter_category_goal = Kickstarter[Kickstarter.state.isin([&quot;successful&quot;, &quot;failed&quot;])]
+
+fig = plt.figure(figsize=(20, 10))
+
+sns.boxplot(x=&quot;staff_pick&quot;, y=&quot;goal&quot;, 
+            hue=&quot;state&quot;, palette=&quot;Pastel1&quot;,
+            data = Kickstarter_category_goal[Kickstarter_category_goal.goal &lt; 30000])
+sns.despine(offset=10, trim=True)
+
+plt.title(&quot;The distribution of campaign goal on staff pick campaign&quot;)
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-10-1.png" width="1920" /></p>
+</div>
+<div id="staff-pick-projects-invest-more-time-in-preparation" class="section level3">
+<h3><strong>Staff pick projects invest more time in preparation</strong></h3>
+<ul>
+<li>Kickstarter usual promoted projects with higher preparation time. Maybe that’s one of the keys leading to success.</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.violinplot(x=&quot;state&quot;, y = &quot;create_to_launch_day&quot;, hue=&quot;staff_pick&quot;, 
+               data = crt_launch_ddl_Kickstarter[crt_launch_ddl_Kickstarter.create_to_launch_day &lt; 100], palette=&quot;Pastel2&quot;,
+               split=True, scale=&quot;count&quot;, inner=&quot;quartile&quot;)
+
+plt.title(&quot;The distribution for the duration between create day to launch day on staff pick&quot;)
+plt.xlabel(&quot;Whether it&#39;s staff picked &quot;)
+plt.ylabel(&quot;&#39;The duration between create day to launch day&quot;)
+plt.show()</code></pre>
+<p><img src="Provide_Insights_files/figure-html/unnamed-chunk-11-1.png" width="1920" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

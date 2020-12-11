@@ -1,0 +1,38 @@
+name: "Data Visualization Portfolio for ANLY 503"
+output_dir: .
+navbar:
+  title: "Olivia"
+  right:
+  - text: "Kickstarter Campaign Visualization" 
+    href: Data.html
+    menu: 
+      - text: "Methods"
+        href: Data.html 
+      - text: "Data Exploration" 
+        href: Data_Exploration.html
+      - text: "Provide Insights" 
+        href: Provide_Insights.html
+      - text: "Network" 
+        href: Network.html
+      - text: "Conclusion"
+        href: conclusion.html    
+  - text: "Bank Transactions Visualization" 
+    menu: 
+      - text: "Methods"
+        href: Methods.html
+      - text: "Analysis"
+        href: Bank_Transaction_Visualization.html
+  - text: "US Election Visualization"
+    href: Historical_US_Election_Visualization.html
+  - text: "State to State Migrations in 2018"
+    href: Migration1.html
+  - icon: fa-github fa-lg
+    href: https://github.com/OliviaXu312/ANLY503_FinalProject
+
+output:
+  html_document:
+    theme: cosmo
+    code_folding: hide
+    lib_dir: site_libs
+    self_contained: no
+

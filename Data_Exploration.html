@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Data_Exploration.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Olivia</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Kickstarter Campaign Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Data.html">Methods</a>
+    </li>
+    <li>
+      <a href="Data_Exploration.html">Data Exploration</a>
+    </li>
+    <li>
+      <a href="Provide_Insights.html">Provide Insights</a>
+    </li>
+    <li>
+      <a href="Network.html">Network</a>
+    </li>
+    <li>
+      <a href="conclusion.html">Conclusion</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Bank Transactions Visualization
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Methods.html">Methods</a>
+    </li>
+    <li>
+      <a href="Bank_Transaction_Visualization.html">Analysis</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Historical_US_Election_Visualization.html">US Election Visualization</a>
+</li>
+<li>
+  <a href="Migration1.html">State to State Migrations in 2018</a>
+</li>
+<li>
+  <a href="https://github.com/OliviaXu312/ANLY503_FinalProject">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<p><img src="kickstarter-logo.png" /></p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.colors
+import geopandas as gpd
+import seaborn as sns
+import warnings
+import pycountry
+import plotly.graph_objs as go
+from plotly import tools
+import plotly.express as px
+from plotly.subplots import make_subplots
+
+sns.set_style(&quot;whitegrid&quot;)
+color = sns.color_palette()
+
+warnings.filterwarnings(&#39;ignore&#39;)</code></pre>
+<pre class="python"><code>Kickstarter = pd.read_csv(&quot;Cleaned_Kickstarter.csv&quot;)
+
+Kickstarter[Kickstarter.country_displayable_name == &quot;the United States&quot;][&quot;country_displayable_name&quot;] = &quot;United States of America&quot;
+Kickstarter[Kickstarter.country_displayable_name == &quot;the United Kingdom&quot;][&quot;country_displayable_name&quot;]  = &quot;United Kingdom&quot;
+Kickstarter[Kickstarter.country_displayable_name == &quot;the Netherlands&quot;][&quot;country_displayable_name&quot;]  = &quot;Netherlands&quot;
+
+# geographic 
+Kickstarter_map = Kickstarter.groupby([&quot;country_displayable_name&quot;, &quot;country&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_map = Kickstarter_map.reset_index()
+
+def alpha3code(column):
+    CODE=[]
+    for country in column:
+        try:
+            if country == &quot;United States of America&quot;:
+                CODE.append(&quot;USA&quot;)
+            elif country == &quot;the United Kingdom&quot;:
+                CODE.append(&quot;GBR&quot;)
+            else:
+                code = pycountry.countries.get(name=country).alpha_3
+                CODE.append(code)
+        except:
+            CODE.append(&#39;None&#39;)
+    return CODE
+
+Kickstarter_map[&#39;CODE&#39;] = alpha3code(Kickstarter_map.country_displayable_name)
+
+world = gpd.read_file(gpd.datasets.get_path(&#39;naturalearth_lowres&#39;))
+world.columns=[&#39;pop_est&#39;, &#39;continent&#39;, &#39;name&#39;, &#39;CODE&#39;, &#39;gdp_md_est&#39;, &#39;geometry&#39;]
+Kickstarter_map_merge = pd.merge(world, Kickstarter_map, on=&#39;CODE&#39;, how = &quot;left&quot;)
+
+location=pd.read_csv(&#39;https://raw.githubusercontent.com/melanieshi0120/COVID-19_global_time_series_panel_data/master/data/countries_latitude_longitude.csv&#39;)
+Kickstarter_map_merge = Kickstarter_map_merge.merge(location,on=&#39;name&#39;)
+
+Kickstarter_state_map = Kickstarter[Kickstarter.location_country == &quot;US&quot;].groupby([&quot;location_country&quot;, &quot;location_state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_state_map = Kickstarter_state_map.reset_index()
+
+geo_usa = gpd.read_file(&#39;maps/cb_2018_us_state_20m.shp&#39;)
+geo_usa = geo_usa[geo_usa.NAME != &quot;Hawaii&quot;]
+geo_usa = geo_usa[geo_usa.NAME != &quot;Alaska&quot;]
+geo_usa = geo_usa[geo_usa.NAME != &quot;Puerto Rico&quot;]
+Kickstarter_state_map = geo_usa.merge(Kickstarter_state_map, how = &quot;left&quot;, left_on=&#39;STUSPS&#39;, right_on = &quot;location_state&quot;)
+
+# Time
+df_ddlwd = Kickstarter.groupby([&quot;deadline_weekday&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+df_ddlwd[&quot;timeline&quot;] = &quot;deadline_weekday&quot;
+df_ddlwd = df_ddlwd.reset_index().rename(columns={&#39;deadline_weekday&#39;: &#39;weekday&#39;})
+
+df_lwd = Kickstarter.groupby([&quot;launched_at_weekday&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+df_lwd[&quot;timeline&quot;] = &quot;launched_at_weekday&quot;
+df_lwd = df_lwd.reset_index().rename(columns={&#39;launched_at_weekday&#39;: &#39;weekday&#39;})
+
+df_scwd = Kickstarter.groupby([&quot;created_at_weekday&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+df_scwd[&quot;timeline&quot;] = &quot;created_at_weekday&quot;
+df_scwd = df_scwd.reset_index().rename(columns={&#39;created_at_weekday&#39;: &#39;weekday&#39;})
+
+Kickstarter_weekday = pd.concat([df_ddlwd, df_lwd, df_scwd], axis=0)
+
+day_order = [&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;]
+
+Kickstarter_weekday_total = Kickstarter_weekday.groupby([&quot;timeline&quot;, &quot;weekday&quot;])[&#39;count&#39;].agg([&#39;sum&#39;])
+Kickstarter_weekday_total = Kickstarter_weekday_total.reset_index()
+
+df_ddlwd = Kickstarter.groupby([&quot;deadline_hr&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+df_ddlwd[&quot;timeline&quot;] = &quot;deadline_hr&quot;
+df_ddlwd = df_ddlwd.reset_index().rename(columns={&#39;deadline_hr&#39;: &#39;workhours&#39;})
+
+df_lwd = Kickstarter.groupby([&quot;launched_at_hr&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+df_lwd[&quot;timeline&quot;] = &quot;launched_at_hr&quot;
+df_lwd = df_lwd.reset_index().rename(columns={&#39;launched_at_hr&#39;: &#39;workhours&#39;})
+
+df_scwd = Kickstarter.groupby([&quot;created_at_hr&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+df_scwd[&quot;timeline&quot;] = &quot;created_at_hr&quot;
+df_scwd = df_scwd.reset_index().rename(columns={&#39;created_at_hr&#39;: &#39;workhours&#39;})
+
+Kickstarter_workhours = pd.concat([df_ddlwd, df_lwd, df_scwd], axis=0)
+
+Kickstarter_workhours_total = Kickstarter_workhours.groupby([&quot;timeline&quot;, &quot;workhours&quot;])[&#39;count&#39;].agg([&#39;sum&#39;])
+Kickstarter_workhours_total = Kickstarter_workhours_total.reset_index()
+
+# category
+Kickstarter_category = Kickstarter[~Kickstarter[&#39;category_parent&#39;].isin([&quot;United Kingdom&quot;, &quot;United States of America&quot;, &quot;Netherlands&quot;])].groupby([&quot;category_parent&quot;, &quot;category_name&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_category = Kickstarter_category.reset_index()
+
+Kickstarter_category_parent = Kickstarter[~Kickstarter[&#39;category_parent&#39;].isin([&quot;United Kingdom&quot;, &quot;United States of America&quot;, &quot;Netherlands&quot;])].groupby([&quot;category_parent&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_category_parent = Kickstarter_category_parent.reset_index()
+
+Kickstarter_category_parent_state = Kickstarter[~Kickstarter[&#39;category_parent&#39;].isin([&quot;United Kingdom&quot;, &quot;United States of America&quot;, &quot;Netherlands&quot;])].groupby([&quot;category_parent&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_category_parent_state = Kickstarter_category_parent_state.reset_index()
+
+
+from wordcloud import WordCloud, ImageColorGenerator
+from nltk.corpus import stopwords
+from PIL import Image
+import random
+cachedStopWords = stopwords.words(&quot;english&quot;)
+
+
+name_coloring = np.array(Image.open(&quot;name.jpg&quot;))
+blurb_coloring = np.array(Image.open(&quot;blurb.jpg&quot;))
+
+name_colors = ImageColorGenerator(name_coloring)
+blurb_colors = ImageColorGenerator(blurb_coloring)
+
+self_lst = [&quot;make&quot;, &quot;new&quot;, &quot;project&quot;, &quot;help&quot;, &quot;life&quot;, &quot;people&quot;, &quot;like&quot;, 
+            &quot;love&quot;, &quot;canceled&quot;, &quot;world&quot;, &quot;need&quot;, &quot;one&quot;, &quot;what&quot;, &quot;create&quot;, 
+            &quot;get&quot;, &quot;want&quot;, &quot;made&quot;, &quot;bring&quot;]
+cachedStopWords += self_lst
+
+name_comment_words = &#39;&#39; 
+blurb_comment_words = &#39;&#39; 
+    
+# iterate through the csv file 
+for name in Kickstarter.name: 
+      
+    # typecaste each val to string 
+    name = str(name) 
+  
+    # split the value 
+    tokens = name.split() 
+      
+    # Converts each token into lowercase 
+    for i in range(len(tokens)): 
+        tokens[i] = tokens[i].lower() 
+      
+    name_comment_words += &quot; &quot;.join(tokens) + &quot; &quot;
+  
+
+for blurb in Kickstarter.blurb: 
+      
+    # typecaste each val to string 
+    blurb = str(blurb) 
+  
+    # split the value 
+    tokens = blurb.split() 
+      
+    # Converts each token into lowercase 
+    for i in range(len(tokens)): 
+        tokens[i] = tokens[i].lower() 
+      
+    blurb_comment_words += &quot; &quot;.join(tokens) + &quot; &quot;
+    
+name_wordcloud = WordCloud(mask=name_coloring,
+                background_color =&#39;white&#39;, 
+                stopwords = cachedStopWords, 
+                min_font_size = 10).generate(name_comment_words) 
+  
+blurb_wordcloud = WordCloud(mask=blurb_coloring,
+                background_color =&#39;white&#39;, 
+                stopwords = cachedStopWords, 
+                min_font_size = 10).generate(blurb_comment_words)
+                
+import datetime
+
+date_list = [&#39;deadline&#39;,&#39;state_changed_at&#39;,&#39;created_at&#39;,&#39;launched_at&#39;]
+
+for col in date_list:
+    Kickstarter[col] = pd.to_datetime(Kickstarter[col])
+    new_col_name = str(col) + &quot;_&quot; + &quot;ym&quot;
+    Kickstarter[new_col_name] = Kickstarter[col].dt.strftime(&#39;%Y-%b&#39;)
+
+Kickstarter_total_ym = Kickstarter.groupby([&quot;launched_at_ym&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_total_ym = Kickstarter_total_ym.reset_index()
+
+Kickstarter_div_ym = Kickstarter.groupby([&quot;launched_at_ym&quot;, &quot;state&quot;])[&#39;blurb&#39;].agg([&#39;count&#39;])
+Kickstarter_div_ym = Kickstarter_div_ym.reset_index()
+
+warnings.filterwarnings(&#39;ignore&#39;)</code></pre>
+<div id="geographic-finding" class="section level2">
+<h2><strong>Geographic Finding</strong></h2>
+<div id="kickstarter-is-predominantly-domestic" class="section level3">
+<h3><strong>Kickstarter is predominantly domestic</strong></h3>
+<ul>
+<li>Although the crowdfunding platform boasts its global reach, 68.5% of Kickstarter’s campaign creators are United States based with the next most popular countries being Great Britain, Canada and Australia.</li>
+</ul>
+<pre class="python"><code>levels = np.linspace(Kickstarter_map_merge[&quot;count&quot;].min(), Kickstarter_map_merge[&quot;count&quot;].max(), 50)
+norm = matplotlib.colors.BoundaryNorm(levels, len(levels))
+
+color_map1 = [&quot;#F5BAB4&quot;,&quot;#FF827F&quot;,&quot;#FA5A54&quot;, &quot;#E6000F&quot; ,&quot;#E6000F&quot; ,&quot;#E6000F&quot;,&quot;#E6000F&quot;,
+              &quot;#CF000E&quot;,&quot;#B3000C&quot;,&quot;#99000A&quot;,&quot;#870009&quot;,&#39;#800008&#39;, &#39;#610006&#39;, 
+              &#39;#3B0004&#39;, &quot;#1F0002&quot;] 
+
+cmap = matplotlib.colors.ListedColormap(color_map1)  
+
+Kickstarter_map_merge.plot(column = &quot;count&quot;, legend = True, figsize=(15, 10),   
+                           cmap = cmap, norm = norm,
+                           missing_kwds={&#39;color&#39;: &#39;white&#39;, 
+                                         &quot;edgecolor&quot;: &quot;lightgrey&quot;, 
+                                         &quot;hatch&quot;: &quot;///&quot;, 
+                                         &quot;label&quot;: &quot;Missing values&quot;},
+                        legend_kwds={&#39;label&#39;: &quot;Number of campaigns&quot;,
+                                      &#39;orientation&#39;: &quot;horizontal&quot;})
+plt.title(&#39;Global distribution of kickstarter campaigns&#39;)</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-3-1.png" width="1440" /></p>
+</div>
+<div id="kickstarter-is-incredibly-popular-in-california" class="section level3">
+<h3><strong>Kickstarter is incredibly popular in California</strong></h3>
+<ul>
+<li>No wonder California is the base of high-tech startups. California loves starting a business. From the map below, majority of campaigns in Kickstarters located in California, with the next most popular countries being New York. Texas with its culture and technology hub Austin also incubates lots of campaigns.</li>
+</ul>
+<pre class="python"><code>Kickstarter_state_map.plot(column = &quot;count&quot;, legend=True, figsize=(15, 10),   
+                           legend_kwds={&#39;label&#39;: &quot;Number of campaigns&quot;,
+                                        &#39;orientation&#39;: &quot;horizontal&quot;}, cmap=&#39;PuBu&#39;)
+
+Kickstarter_state_map[&#39;lon&#39;] = Kickstarter_state_map.geometry.centroid.map(lambda p: p.x)
+Kickstarter_state_map[&#39;lat&#39;] = Kickstarter_state_map.geometry.centroid.map(lambda p: p.y)
+
+for i in range(len(Kickstarter_state_map)):
+    plt.text(Kickstarter_state_map.lon[i],
+             Kickstarter_state_map.lat[i],
+             Kickstarter_state_map.STUSPS[i])
+    
+plt.title(&#39;Distribution of kickstarter campaigns in US&#39;)
+plt.show()</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-4-1.png" width="1440" /></p>
+</div>
+</div>
+<div id="campaign-time-finding" class="section level2">
+<h2><strong>Campaign Time Finding</strong></h2>
+<div id="popular-after-2014-and-hit-new-highs-after-covid-19" class="section level3">
+<h3><strong>Popular after 2014 and hit new highs after Covid-19</strong></h3>
+<ul>
+<li>Kickstarter boomed after 2014, when the US recovered from the previous recession and enjoyed the steady growth of Economy. And then after March 2020, the unemployment rate reached a new record due to Covid-19, lots of people choose to start a new business in Kickstarter. So correspondingly, the number of whole projects hits new highs.</li>
+</ul>
+<pre class="python"><code>from contextlib import contextmanager
+import sys, os
+
+@contextmanager
+def suppress_stdout():
+    with open(os.devnull, &quot;w&quot;) as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
+        try:  
+            yield
+        finally:
+            sys.stdout = old_stdout
+
+with suppress_stdout():
+  fig, ax = plt.subplots(figsize=(30, 10))
+  
+  sns.barplot(x=&quot;launched_at_ym&quot;, y=&quot;count&quot;, hue=&quot;state&quot;, palette = &quot;pastel&quot;, ax=ax,
+              data=Kickstarter_div_ym[Kickstarter_div_ym.state.isin([&quot;successful&quot;, &quot;failed&quot;])])
+  
+  ax.set_title(&#39;Distribution of Campaigns over ten years&#39;)
+  ax.set_xlabel(&#39;Time&#39;)
+  ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+  ax.set_ylabel(&#39;Number of Campaigns&#39;)
+  
+  sns.lineplot(x=&quot;launched_at_ym&quot;, y=&quot;count&quot;, data = Kickstarter_total_ym, palette = &quot;Set2&quot;, ax = ax)
+
+  plt.show()</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-5-1.png" width="2880" /></p>
+<pre class="python"><code>warnings.filterwarnings(&#39;ignore&#39;)</code></pre>
+</div>
+<div id="launched-at-tuesday-and-ended-after-thursday" class="section level3">
+<h3><strong>Launched at Tuesday and Ended after Thursday</strong></h3>
+<ul>
+<li>The timeline of a Kickstarter campaign includes creation of the campaign where creators set up the funding page and marketing material, launching the campaign where creators publish the campaign to the world for others to start backing, and the campaign deadline where funding stops. Creation and launching is more popular in the beginning of the week, especially on Tuesday (In fact, 61% of campaigns are launched Monday-Wednesday. In contrast, campaign deadlines are more commonly placed at the end of the week with over 50% of deadlines falling Wednesday-Friday, and 18% of deadlines on Fridays alone.</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.lineplot(x=&quot;weekday&quot;, y=&quot;sum&quot;,
+            hue=&quot;timeline&quot;, sort= True,
+             data = Kickstarter_weekday_total.set_index(&quot;weekday&quot;).loc[day_order])
+
+plt.title(&quot;Distribution of Campaigns over Weekdays&quot;)
+plt.ylabel(&quot;Number of Campaigns&quot;)
+plt.show()</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-6-1.png" width="1920" /></p>
+</div>
+<div id="launch-time-and-deadline-usually-at-night" class="section level3">
+<h3><strong>Launch time and deadline usually at night</strong></h3>
+<ul>
+<li>The timing of campaign creation, launch time, and deadline are usually at night. One notable exception here is, as you can see, there is a spike in campaige deadlines around 11qm - 1pm, suggesting that people create Kickstarter campaigns during the lunch time</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.lineplot(x=&quot;workhours&quot;, y=&quot;sum&quot;,
+            hue=&quot;timeline&quot;, data = Kickstarter_workhours_total)
+
+plt.title(&quot;Distribution of Campaigns over Workhours&quot;)
+plt.ylabel(&quot;Number of Campaigns&quot;)
+plt.show()</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-7-1.png" width="1920" /></p>
+</div>
+</div>
+<div id="name-and-description" class="section level2">
+<h2><strong>Name and Description</strong></h2>
+<div id="keywords-in-name-and-description" class="section level3">
+<h3><strong>Keywords in name and description</strong></h3>
+<ul>
+<li>Most of keywords in campaign description are under art domain, which corresponding with its name keywords and the fact that majority of projects are under art and entertainment category.</li>
+</ul>
+<pre class="python"><code>fig, ax = plt.subplots(1, 2, figsize=(20, 10))
+
+ax[0].imshow(name_wordcloud.recolor(color_func = name_colors, random_state = 10))
+ax[0].set_title(&#39;Wordcloud for all campaign name \n&#39;, fontsize=20)
+
+
+ax[1].imshow(blurb_wordcloud.recolor(color_func = blurb_colors, random_state = 10))
+ax[1].set_title(&#39;Wordcloud for all description \n&#39;, fontsize=20)
+
+for x in ax:
+    x.set_axis_off() 
+    
+plt.show() </code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-8-1.png" width="1920" /></p>
+</div>
+</div>
+<div id="category-finding" class="section level2">
+<h2><strong>Category Finding</strong></h2>
+<div id="kickstarter-campaigns-have-a-strong-technology-and-entertainment-focus" class="section level3">
+<h3><strong>Kickstarter campaigns have a strong technology and entertainment focus</strong></h3>
+<ul>
+<li>If you’re familiar with Kickstarter, you’re not likely not surprised that art and entertainment oriented project including films and video, music, publishing, art and games dominated Kickstarter. Besides that technology-focused projects did make up 10.4% of all projects with a category listed.</li>
+</ul>
+<pre class="python"><code>parent_pie = go.Pie(labels = Kickstarter_category_parent.category_parent, 
+             values = Kickstarter_category_parent[&quot;count&quot;], 
+            marker=dict(colors = px.colors.qualitative.Set3, line=dict(color=&#39;#FFF&#39;, width=2)),  
+            domain={&#39;x&#39;: [0.0, .4], &#39;y&#39;: [0.0, 1]}, showlegend=False, textinfo=&#39;label+percent&#39;)
+
+layout = go.Layout(height = 600,
+                   width = 1000,
+                   title = &#39;&quot;Distribution of parent category&#39;)
+fig = go.Figure(data = parent_pie, layout = layout)
+
+#fig.show()</code></pre>
+<p><img src="parent_pie.jpg" /></p>
+</div>
+<div id="technology-food-and-craft-oriented-campaigns-are-more-likely-failed" class="section level3">
+<h3><strong>Technology, food and craft oriented campaigns are more likely failed</strong></h3>
+<ul>
+<li>Comparing to other categories, technology, food, craft and journalism oriented campaigns have a higher failure rate than other projects. However, majority of comics focused campaign will reach to success in the end.</li>
+</ul>
+<pre class="python"><code>fig = plt.figure(figsize=(20, 10))
+
+sns.barplot(data = Kickstarter_category_parent_state, hue_order = [&quot;successful&quot;, &quot;failed&quot;, &quot;canceled&quot;, &quot;live&quot;],
+             x=&quot;category_parent&quot;, y=&quot;count&quot;, hue = &quot;state&quot;,palette = &quot;Set2&quot;)
+
+plt.title(&#39;Distribution of Campaigns State over Category&#39;)
+plt.show()</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-10-1.png" width="1920" /></p>
+</div>
+<div id="the-possible-reason-for-technology-and-food-oriented-projects-failure" class="section level3">
+<h3><strong>The possible reason for technology and food oriented projects’ failure</strong></h3>
+<ul>
+<li>Comparing to other projects, campaigns under technology and food category obviously sets a higher goal.The median goal for successful campaigns from this data is 5,750, while the median goal in food oriented campaigns is over 8,213 and the median goal in technology oriented campaigns is over 10,000. Maybe that’s the reason for their failure.</li>
+</ul>
+<pre class="python"><code>Kickstarter_category_goal = Kickstarter[Kickstarter.state.isin([&quot;successful&quot;, &quot;failed&quot;])]
+
+fig = plt.figure(figsize=(20, 10))
+
+sns.violinplot(x=&quot;category_parent&quot;, y=&quot;goal&quot;,
+            hue=&quot;state&quot;, palette=&quot;Pastel1&quot;,
+            split=True, scale=&quot;count&quot;, inner=&quot;quartile&quot;,
+            data = Kickstarter_category_goal[Kickstarter_category_goal.goal &lt; 30000])
+sns.despine(offset=10, trim=True)
+
+plt.title(&quot;The distribution of campaign goal under different category&quot;)
+plt.show()</code></pre>
+<p><img src="Data_Exploration_files/figure-html/unnamed-chunk-11-1.png" width="1920" /></p>
+</div>
+<div id="appendix" class="section level3">
+<h3><strong>Appendix</strong></h3>
+<ul>
+<li>The distribution of category under parent category</li>
+</ul>
+<pre class="python"><code>#category_parent_lst = Kickstarter_category_parent.category_parent.unique()
+
+#fig = make_subplots(
+#    rows = 5, cols = 3,
+#    specs=[[{&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}],
+#          [{&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}],
+#          [{&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}],
+#          [{&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}],
+#          [{&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}, {&quot;type&quot;: &quot;pie&quot;}]],
+#    subplot_titles=(&#39;Art&#39;, &#39;Comics&#39;, &#39;Crafts&#39;, &#39;Dance&#39;, &#39;Design&#39;, &#39;Fashion&#39;,
+#       &#39;Film &amp; Video&#39;, &#39;Food&#39;, &#39;Games&#39;, &#39;Journalism&#39;, &#39;Music&#39;,
+#       &#39;Photography&#39;, &#39;Publishing&#39;, &#39;Technology&#39;, &#39;Theater&#39;))
+
+
+#i = 0
+#for row in range(1, 6):
+#    for col in range(1, 4):
+#        fig.add_trace(go.Pie(labels = Kickstarter_category[Kickstarter_category.category_parent == #category_parent_lst[i]].category_name, 
+#                     values = Kickstarter_category[Kickstarter_category.category_parent == &quot;Art&quot;][&quot;count&quot;], 
+#                    marker=dict(colors = px.colors.qualitative.Set3, line=dict(color=&#39;#FFF&#39;, width=2)),  
+#                    domain={&#39;x&#39;: [0.0, .4], &#39;y&#39;: [0.0, 1]}, showlegend=False, textinfo=&#39;label+percent&#39;), row=row, col=col)
+#        i += 1
+
+
+#fig.update_layout(height=2000, width=1500, showlegend=False, title_text=&quot;Distribution of category under parent category&quot;)
+#warnings.filterwarnings(&#39;ignore&#39;)
+
+# This is the Code that generated the following graph</code></pre>
+<p><img src="pie.jpg" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

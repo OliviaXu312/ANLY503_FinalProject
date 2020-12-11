@@ -1,0 +1,62 @@
+---
+title: "State to State Migrations in 2018"
+output: 
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+---
+
+### **Introduction**
+
+In this project I will visualize the flow of people between different states in the United States over the period of one year, using network graphs. I will work on New York, Texas, California and Virginia as the origin states for this visualization, and show graphically the relative numbers of people that moved to the top 10 destination states from each of the origin states.
+
+
+### **Data**
+
+**The State_to_State_Migrations Dataset**: This dataset contained a single sheet with all the relevant data from the American Community Survey for the year 2018. 
+  + Source: [US Census](https://www.census.gov/data/tables/time-series/demo/geographic-mobility/state-to-state-migration.html)
+
+```{r global-options, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache=TRUE, warning=FALSE, message=FALSE)
+```
+
+
+```{r}
+library(dplyr)
+library(ggraph)
+library(graphlayouts)
+library(tidygraph)
+library(readxl)
+
+df <- read.csv("result.csv", header=TRUE, sep=",")
+df$X <- NULL
+
+# df_node <- data.frame("target" = c("New York", "New Jersey", "California", "Florida", "Pennsylvania", "Texas", 
+#                                  "Connecticut", "Massachusetts", "Virginia", "North Carolina", "Georgia", "Louisiana",
+#                                  "Oklahoma", "Colorado", "Missouri", "Illinois", "Arizona", "Washington", "Oregon",
+#                                  "Nevada", "Maryland", "District of Columbia", "South Carolina"))
+df_node <- data.frame("target" = unique(df$target))
+df_edge <- df
+
+df_graph <- tbl_graph(nodes = df_node, edges = df_edge,  directed = TRUE)
+```
+
+### **Visualization **
+
+### State to State Migrations in 2018
+ + The following map shows the comparison between the proportion of the vote won by democrats in Texas and the unemployment rate in Texas for 2008, 2012, 2016. 
+
+```{r}
+ggraph(df_graph, layout = 'linear', circular = TRUE) +
+  geom_edge_arc(aes(width = count, colour = as.factor(from)), alpha = 0.5) +
+  scale_edge_width(range = c(0.5, 10)) +
+  geom_node_point(aes(colour = target, size = 100)) +
+  geom_node_text(aes(label = target),family="serif", nudge_y = 0.1) +
+  scale_size(range = c(1,5)) +
+  theme_graph() +
+    labs( title = "State to State Migrations in 2018") +
+    theme(plot.title = element_text(size = 14, hjust = 0.5)) + 
+  theme(legend.position = "none")
+```
+

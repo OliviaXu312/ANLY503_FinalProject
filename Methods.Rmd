@@ -1,0 +1,90 @@
+---
+title: "Methods"
+output: 
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+---
+
+### **Problem Background**
+
+Once upon a time, there was a bank offering services to private persons. The services include managing of accounts, offering loans, etc. <br>
+
+The bank wants to improve their services. For instance, the bank managers have only vague idea, who is a good client (whom to offer some additional services) and who is a bad client (whom to watch carefully to minimize the bank loses). Fortunately, the bank stores data about their clients, the accounts (transactions within several months), the loans already granted, the credit cards issued. The bank managers hope to improve their understanding of customers and seek specific actions to improve services. <br>
+
+
+### **Data**
+
+**The final dataset**: This dataset combines the data from 8 different dataset, which contains the following information for each account using the following field names
+
+  + account_id: Account number
+  + district_name: Name of the district where the account is
+  + open_date: Date when account was opened
+  + statement_frequency: The frequency that statements are generated for the account
+  + num_customers: The total number of clients associated with the account (owner and users)
+  + credit_cards: Number of credit cards for an account or zero if none
+  + loan: T/F if the account has a loan
+  + loan_amount: The amount of the loan if there is one, NA if none
+  + loan_payments: The amount of the loan payment if there is one, NA if none
+  + loan_term: The duration of loan in months, NA if none
+  + loan_status: The status of the loan (current or expired), NA if none
+  + loan_default: T/F if the loan is in default, or NA if none
+  + max_withdrawal: Maximum amount withdrawn for the account
+  + min_withdrawal: Minimum amount withdrawn for the account
+  + cc_payments: Count of credit payments for the account for all cards
+  + max_balance: Maximum balance in the account
+  + min_balance: Minimum balance in the account
+  
+**Accounts**: This dataset contains information about the bank's accounts.
+
+**Clients**: This dataset contains information about the bank's customers. A client (customer) can have several accounts.
+
+**Links**: This dataset contains information that links customers to accounts, and wether a customer is the owner or a user in a given account.
+
+**transactions**: This dataset contains all of the bank's transactions.
+
+**payment_orders**: This dataset contains information about orders for payments to other banks via bank transfers. A customer issues an order for payment and the bank executes the payment. These payments should also be reflected in the transactions.csv data as debits.
+
+**cards**: This dataset contains information about credit cards issued to clients. Accounts can have more than one credit card.
+
+**loans**: This dataset contains information about loans associated with accounts. Only one loan is allowed per account.
+
+**districts**: This dataset contains demographic information and characteristics about the districts where customers and branches are located.
+
+
+### **The Variables** 
+
+* account_id: Account number
+
+* district_name: Name of the district where the account is
+
+* open_date: Date when account was opened
+
+* statement_frequency: The frequency that statements are generated for the account
+
+* num_customers: The total number of clients associated with the account (owner and users)
+
+* credit_cards: Number of credit cards for an account or zero if none
+
+* loan: T/F if the account has a loan
+
+* loan_amount: The amount of the loan if there is one, NA if none
+
+* loan_payments: The amount of the loan payment if there is one, NA if none
+
+* loan_term: The duration of loan in months, NA if none
+
+* loan_status: The status of the loan (current or expired), NA if none
+
+* loan_default: T/F if the loan is in default, or NA if none
+
+* max_withdrawal: Maximum amount withdrawn for the account
+
+* min_withdrawal: Minimum amount withdrawn for the account
+
+* cc_payments: Count of credit payments for the account for all cards
+
+* max_balance: Maximum balance in the account
+
+* min_balance: Minimum balance in the account

@@ -1,0 +1,43 @@
+---
+title: ""
+output: 
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+---
+
+![](kickstarter-logo.png)
+
+```{r global-options, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache=TRUE, warning=FALSE, message=FALSE)
+```
+
+
+```{r}
+library(ggraph)
+library(tidygraph)
+library(igraph)
+library(dplyr)
+
+df <- read.csv("popular_network.csv", header=TRUE, sep=",")
+df$X <- NULL
+
+graph <- as_tbl_graph(df) %>% mutate(Popularity = centrality_degree(mode = "in"))
+```
+
+## **Network**
+
+ + The friend relationship between the users who are one of the most popular and have the most amount of backers in Kickstatrer.
+
+```{r}
+ggraph(graph, "stress", bbox = 15) + 
+    geom_edge_link2(aes(edge_colour = factor(gender)),edge_width = 0.5) + 
+    geom_node_point(aes(size = Popularity, fill = factor(Popularity))) +
+    geom_node_text(aes(label = name, filter=Popularity > 1), family = "serif",repel = TRUE)+
+    scale_edge_colour_brewer(palette = "Set2")+
+    scale_size(range=c(1, 2),guide = FALSE)+
+    theme_graph()+
+    theme(legend.position = "bottom")
+```
+

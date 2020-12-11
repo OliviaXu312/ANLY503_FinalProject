@@ -1,0 +1,7 @@
+base
+reticulate
+ggplot2
+ggraph
+tidygraph
+igraph
+dplyr
